@@ -1,0 +1,42 @@
+<h1 class="text-center my-4">Employer Details</h1>
+
+<div class="container">
+  <div class="card">
+    <div class="card-body">
+      <h2 class="card-title"><%= @employer.name %></h2>
+
+      <p class="card-text"><strong>Position:</strong> <%= @employer.position %></p>
+      <p><strong>Salary:</strong> <%= @employer.salary %></p>
+
+      <div class="mt-3">
+        <%= link_to 'Edit', edit_employer_path(@employer), class: 'btn btn-warning mb-2' %>
+        <button type="button" class="btn btn-danger mb-2" data-bs-toggle="modal" data-bs-target="#deleteModal">
+          Delete
+        </button>
+        <%= link_to 'Back to Employers', employers_path, class: 'btn btn-secondary' %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Delete Confirmation Modal -->
+<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header bg-danger text-white">
+        <h5 class="modal-title" id="deleteModalLabel">Delete Confirmation</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p>Are you sure you want to delete <strong><%= @employer.name %></strong>? This action cannot be undone.</p>
+      </div>
+      <div class="modal-footer">
+        <%= button_to 'Yes, Delete', employer_path(@employer), method: :delete, class: 'btn btn-danger' %>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Include Bootstrap JavaScript (if not already included in your layout) -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>

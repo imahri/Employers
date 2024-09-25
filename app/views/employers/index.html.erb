@@ -1,0 +1,56 @@
+<h1 class="text-center my-4">Employers</h1>
+
+<div class="text-center mb-3">
+  <%= link_to 'New Employer', new_employer_path, class: 'btn btn-success' %>
+</div>
+
+<% if @employers.any? %>
+  <table class="table table-striped table-bordered">
+    <thead class="thead-dark">
+      <tr>
+        <th>Name</th>
+        <th>Edit</th>
+        <th>Delete</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @employers.each do |employer| %>
+        <tr>
+          <td><%= link_to employer.name, employer_path(employer), class: 'text-primary' %></td>
+          <td><%= button_to 'Edit', edit_employer_path(employer), method: :get, class: 'btn btn-warning' %></td>
+          <td>
+            <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal<%= employer.id %>">
+              Delete
+            </button>
+
+            <!-- Delete Confirmation Modal -->
+            <div class="modal fade" id="deleteModal<%= employer.id %>" tabindex="-1" aria-labelledby="deleteModalLabel<%= employer.id %>" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header bg-danger text-white">
+                    <h5 class="modal-title" id="deleteModalLabel<%= employer.id %>">Delete Confirmation</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+                    <p>Are you sure you want to delete <strong><%= employer.name %></strong>? This action cannot be undone.</p>
+                  </div>
+                  <div class="modal-footer">
+                    <%= button_to 'Yes, Delete', employer_path(employer), method: :delete, class: 'btn btn-danger' %>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <div class="alert alert-info text-center">
+    No employers available
+  </div>
+<% end %>
+
+<!-- Include Bootstrap JavaScript (if not already included in your layout) -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>

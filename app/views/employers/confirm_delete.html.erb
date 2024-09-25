@@ -1,0 +1,17 @@
+<!-- app/views/employers/confirm_delete.html.erb -->
+
+<div class="container mt-5">
+  <div class="card text-center">
+    <div class="card-header bg-danger text-white">
+      <h2>Delete Confirmation</h2>
+    </div>
+    <div class="card-body">
+      <h4 class="card-title">Are you sure you want to delete <%= @employer.name %>?</h4>
+      <p class="card-text">This action cannot be undone.</p>
+      <div class="mt-4">
+        <%= button_to 'Yes, Delete', employer_path(@employer), method: :delete, class: 'btn btn-danger btn-lg me-2 mb-2' %>
+        <%= link_to 'No, Go Back', employers_path, class: 'btn btn-secondary btn-lg' %>
+      </div>
+    </div>
+  </div>
+</div>
